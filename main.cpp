@@ -11,9 +11,10 @@ int main()
 	{
 		std::cout << "Falha ao criar socket. Erro numero: " << errno << std::endl;
 		exit(EXIT_FAILURE);
-	} else {
-		std::cout << "Socket criado com sucesso" << std::endl;
-	}
+	}	
+
+	std::cout << "Socket criado com sucesso" << std::endl;
+	
 
 	sockaddr_in sockaddr;
 	sockaddr.sin_family = AF_INET;
@@ -26,25 +27,28 @@ int main()
 	if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) <0 ) {
 		std::cout << "Falha ao ligar porta 9999. Erro número" << errno << std::endl;
 		exit(EXIT_FAILURE);
-	} else {
-		std::cout << "Servidor ligado a porta 9999" << std::endl;
 	}
+
+	std::cout << "Servidor ligado a porta 9999" << std::endl;
+
 
 	if(listen(sockfd, 10) < 0) {
 		std::cout << "Erro ao escutar socket, Erro número: " << errno << std::endl;
 		exit(EXIT_FAILURE);
-	} else {
-		std::cout << "Socket escutando" << std::endl;
-	} 
+	}
+
+	std::cout << "Socket escutando" << std::endl;
+	 
 
 	auto addrlen = sizeof(sockaddr);
 	int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
 	if(connection < 0) {
 		std::cout << "Falha ao criar conexão. Erro número: " << errno << std::endl;
 		exit(EXIT_FAILURE);
-	} else {
-		std::cout << "Conexão criada" << std::endl;
 	}
+
+	std::cout << "Conexão criada" << std::endl;
+	
 
 	char buffer[100];
 	auto bytesRead = read(connection, buffer, 100);
